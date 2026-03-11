@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rolê de Quinta - Loja Oficial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Header com Carrinho -->
+  <header class="header">
+    <div class="container header-content">
+      <div class="logo">
+        <img src="images/LOGOTIPO.png" alt="Rolê de Quinta" class="logo-img">
+      </div>
+      <div class="header-actions">
+        <h1 class="header-title">LOJA OFICIAL - SÉRIE RQ 2026</h1>
+        <button class="btn-carrinho" onclick="toggleCarrinho()">
+          🛒 <span id="carrinho-count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <h2 class="hero-title">VISTA A IRMANDADE</h2>
+      <p class="hero-subtitle">Moletons exclusivos para quem vive e respira motociclismo. Qualidade premium, estilo único.</p>
+      <a href="#vitrine" class="btn btn-primary">VER COLEÇÃO</a>
+    </div>
+  </section>
+
+  <!-- Vitrine -->
+  <section id="vitrine" class="vitrine">
+    <div class="container">
+      <h2 class="section-title">ESCOLHA SEU MOLETOM</h2>
+      <p class="section-desc">5 cores exclusivas. Acabamento Premium e modelagem confortável.</p>
+      
+      <div class="galeria">
+        <div class="card-produto">
+          <div class="produto-img" style="background-image: url('images/VERMELHO.png.png');">
+            <div class="produto-badge">DISPONÍVEL</div>
+          </div>
+          <div class="produto-info">
+            <h3>VERMELHO</h3>
+            <span class="preco">R$ 185,00</span>
+            <div class="produto-qtd">
+              <label>Quantidade:</label>
+              <input type="number" id="qtd-vermelho" value="1" min="1" max="10">
+            </div>
+            <div class="tamanho-selector">
+              <label>Tamanho:</label>
+              <select class="tamanho-select" id="tamanho-vermelho">
+                <option value="P">P</option>
+                <option value="M">M</option>
+                <option value="G">G</option>
+                <option value="GG">GG</option>
+                <option value="EXG">EXG</option>
+              </select>
+            </div>
+            <button class="btn-comprar" onclick="adicionarAoCarrinho('VERMELHO', 185, 'tamanho-vermelho', 'qtd-vermelho')">
+              🛒 ADICIONAR AO CARRINHO
+            </button>
+          </div>
+        </div>
+        <div class="card-produto">
+          <div class="produto-img" style="background-image: url('images/AZUL.png.png');">
+            <div class="produto-badge">DISPONÍVEL</div>
+          </div>
+          <div class="produto-info">
+            <h3>AZUL</h3>
+            <span class="preco">R$ 185,00</span>
+            <div class="produto-qtd">
+              <label>Quantidade:</label>
+              <input type="number" id="qtd-azul" value="1" min="1" max="10">
+            </div>
+            <div class="tamanho-selector">
+              <label>Tamanho:</label>
+              <select class="tamanho-select" id="tamanho-azul">
+                <option value="P">P</option>
+                <option value="M">M</option>
+                <option value="G">G</option>
+                <option value="GG">GG</option>
+                <option value="EXG">EXG</option>
+              </select>
+            </div>
+            <button class="btn-comprar" onclick="adicionarAoCarrinho('AZUL', 185, 'tamanho-azul', 'qtd-azul')">
+              🛒 ADICIONAR AO CARRINHO
+            </button>
+          </div>
+        </div>
+        <div class="card-produto">
+          <div class="produto-img" style="background-image: url('images/VERDE.png.png');">
+            <div class="produto-badge">DISPONÍVEL</div>
+          </div>
+          <div class="produto-info">
+            <h3>VERDE</h3>
+            <span class="preco">R$ 185,00</span>
+            <div class="produto-qtd">
+              <label>Quantidade:</label>
+              <input type="number" id="qtd-verde" value="1" min="1" max="10">
+            </div>
+            <div class="tamanho-selector">
+              <label>Tamanho:</label>
+              <select class="tamanho-select" id="tamanho-verde">
+                <option value="P">P</option>
+                <option value="M">M</option>
+                <option value="G">G</option>
+                <option value="GG">GG</option>
+                <option value="EXG">EXG</option>
+              </select>
+            </div>
+            <button class="btn-comprar" onclick="adicionarAoCarrinho('VERDE', 185, 'tamanho-verde', 'qtd-verde')">
+              🛒 ADICIONAR AO CARRINHO
+            </button>
+          </div>
+        </div>
+        <div class="card-produto">
+          <div class="produto-img" style="background-image: url('images/ROSA.png.png');">
+            <div class="produto-badge">DISPONÍVEL</div>
+          </div>
+          <div class="produto-info">
+            <h3>ROSA / PINK</h3>
+            <span class="preco">R$ 185,00</span>
+            <div class="produto-qtd">
+              <label>Quantidade:</label>
+              <input type="number" id="qtd-rosa" value="1" min="1" max="10">
+            </div>
+            <div class="tamanho-selector">
+              <label>Tamanho:</label>
+              <select class="tamanho-select" id="tamanho-rosa">
+                <option value="P">P</option>
+                <option value="M">M</option>
+                <option value="G">G</option>
+                <option value="GG">GG</option>
+                <option value="EXG">EXG</option>
+              </select>
+            </div>
+            <button class="btn-comprar" onclick="adicionarAoCarrinho('ROSA / PINK', 185, 'tamanho-rosa', 'qtd-rosa')">
+              🛒 ADICIONAR AO CARRINHO
+            </button>
+          </div>
+        </div>
+        <div class="card-produto">
+          <div class="produto-img" style="background-image: url('images/PRETO.png.png');">
+            <div class="produto-badge">DISPONÍVEL</div>
+          </div>
+          <div class="produto-info">
+            <h3>PRETO</h3>
+            <span class="preco">R$ 185,00</span>
+            <div class="produto-qtd">
+              <label>Quantidade:</label>
+              <input type="number" id="qtd-preto" value="1" min="1" max="10">
+            </div>
+            <div class="tamanho-selector">
+              <label>Tamanho:</label>
+              <select class="tamanho-select" id="tamanho-preto">
+                <option value="P">P</option>
+                <option value="M">M</option>
+                <option value="G">G</option>
+                <option value="GG">GG</option>
+                <option value="EXG">EXG</option>
+              </select>
+            </div>
+            <button class="btn-comprar" onclick="adicionarAoCarrinho('PRETO', 185, 'tamanho-preto', 'qtd-preto')">
+              🛒 ADICIONAR AO CARRINHO
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal Carrinho -->
+  <div id="modal-carrinho" class="modal-carrinho">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>🛒 SEU CARRINHO</h2>
+        <button class="modal-close" onclick="toggleCarrinho()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div id="carrinho-itens"></div>
+        <div class="carrinho-total">
+          <span>Total:</span>
+          <span id="carrinho-valor">R$ 0,00</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="toggleCarrinho()">CONTINUAR COMPRANDO</button>
+        <button class="btn btn-primary" onclick="abrirCheckout()">FINALIZAR COMPRA</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Checkout -->
+  <div id="modal-checkout" class="modal-checkout">
+    <div class="modal-content checkout-content">
+      <div class="modal-header">
+        <h2>💳 FINALIZAR PEDIDO</h2>
+        <button class="modal-close" onclick="fecharCheckout()">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="checkout-form" onsubmit="finalizarPedido(event)">
+          <div class="form-section">
+            <h3>📋 DADOS PESSOAIS</h3>
+            <div class="form-group">
+              <label for="nome">Nome Completo *</label>
+              <input type="text" id="nome" name="nome" required placeholder="Digite seu nome">
+            </div>
+            <div class="form-group">
+              <label for="whatsapp">WhatsApp *</label>
+              <input type="tel" id="whatsapp" name="whatsapp" required placeholder="(00) 00000-0000">
+            </div>
+            <div class="form-group">
+              <label for="email">E-mail *</label>
+              <input type="email" id="email" name="email" required placeholder="seu@email.com">
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3>📍 RETIRADA DO PRODUTO</h3>
+            <div class="pix-destaque">
+              <p>🏍️ <strong>Entrega:</strong> Os moletons serão entregues pessoalmente nos <strong>dias de Rolê oficial</strong> do grupo.</p>
+              <p>📢 <strong>Avisos:</strong> Sempre informamos no grupo do RQ quando os moletons chegarem.</p>
+              <p class="pix-instrucao">⚠️ Após confirmar o PIX, entre em contato com os administradores para verificar se seu moletom já chegou e combinar a retirada.</p>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3>💰 PAGAMENTO VIA PIX</h3>
+            <div class="pix-destaque">
+              <p class="pix-aviso">✅ Confirmação imediata do pagamento</p>
+              <p><strong>Chave PIX (Celular):</strong> (41) 99968-4188</p>
+              <p><strong>Nome:</strong> David Ahmad</p>
+              <p><strong>Valor do Pedido:</strong> <span id="pix-valor-destaque">R$ 0,00</span></p>
+              <button type="button" class="btn-copiar" onclick="copiarPix()">📋 COPIAR CHAVE PIX (41999684188)</button>
+              <p id="copy-msg" class="copy-msg"></p>
+              <p class="pix-instrucao">⚠️ O pedido só será confirmado após comprovação do pagamento.</p>
+            </div>
+          </div>
+
+          <div class="resumo-pedido">
+            <h3>📦 RESUMO DO PEDIDO</h3>
+            <div id="checkout-resumo"></div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="fecharCheckout()">VOLTAR</button>
+        <button type="submit" id="btn-confirmar-pedido" class="btn btn-primary" form="checkout-form">CONFIRMAR PEDIDO</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabela de Medidas -->
+  <section class="medidas">
+    <div class="container">
+      <h2 class="section-title">TAMANHO IDEAL</h2>
+      <p class="section-desc">Confira as medidas antes de pedir. Sem trocas por tamanho errado.</p>
+      
+      <div class="tabela-wrapper">
+        <table class="tabela-medidas">
+          <thead>
+            <tr>
+              <th>TAM</th>
+              <th>ALTURA</th>
+              <th>LARGURA</th>
+              <th>MANGA</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>P</td><td>68 cm</td><td>52 cm</td><td>58 cm</td></tr>
+            <tr><td>M</td><td>70 cm</td><td>54 cm</td><td>59 cm</td></tr>
+            <tr><td>G</td><td>71 cm</td><td>56 cm</td><td>63 cm</td></tr>
+            <tr><td>GG</td><td>73 cm</td><td>60 cm</td><td>66 cm</td></tr>
+            <tr><td>EXG</td><td>76 cm</td><td>64 cm</td><td>69 cm</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="obs-medidas">* As medidas podem variar em até 2cm para mais ou para menos.</p>
+    </div>
+  </section>
+
+  <!-- Regras -->
+  <section class="regras">
+    <div class="container">
+      <h2 class="section-title text-light">⚠️ REGRAS IMPORTANTES</h2>
+      
+      <div class="regras-grid">
+        <div class="regra-card">
+          <div class="regra-icon">💰</div>
+          <h3>PAGAMENTO 100% ANTECIPADO</h3>
+          <p>Pedido só é confirmado após comprovação do PIX.</p>
+        </div>
+        <div class="regra-card">
+          <div class="regra-icon">🚫</div>
+          <h3>SEM TROCAS</h3>
+          <p>Não realizamos trocas por erros de preenchimento ou tamanho escolhido errado.</p>
+        </div>
+        <div class="regra-card">
+          <div class="regra-icon">📅</div>
+          <h3>PRAZO E RETIRADA</h3>
+          <p>Os moletons são produzidos por lotes. Após o fechamento do lote, o prazo é de 30 dias úteis. A entrega é feita exclusivamente nos eventos do Rolê de Quinta.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Como Comprar -->
+  <section class="como-comprar">
+    <div class="container">
+      <h2 class="section-title">COMO COMPRAR</h2>
+      <p class="section-desc">Garanta seu moletom oficial em poucos passos. O pagamento é via PIX e a retirada é exclusiva nos encontros do grupo.</p>
+
+      <div class="passos">
+        <div class="passo">
+          <div class="passo-numero">1</div>
+          <h3>ESCOLHA O MODELO</h3>
+          <p>Selecione a cor e o tamanho ideal na vitrine acima.</p>
+        </div>
+        <div class="passo">
+          <div class="passo-numero">2</div>
+          <h3>ADICIONE AO CARRINHO</h3>
+          <p>Clique em "ADICIONAR AO CARRINHO" nos itens desejados.</p>
+        </div>
+        <div class="passo">
+          <div class="passo-numero">3</div>
+          <h3>PAGUE VIA PIX</h3>
+          <p>Finalize o pedido e faça o PIX para a chave do David Ahmad.</p>
+        </div>
+        <div class="passo">
+          <div class="passo-numero">4</div>
+          <h3>CONFIRME NO WHATSAPP</h3>
+          <p>Você será redirecionado para enviar os dados e o comprovante para o David.</p>
+        </div>
+        <div class="passo">
+          <div class="passo-numero">5</div>
+          <h3>RETIRE NO ROLÊ</h3>
+          <p>RETIRE NO ROLÊ - Procure o David ou um ADM nos encontros oficiais.</p>
+        </div>
+      </div>
+
+      <div class="como-comprar-cta">
+        <a href="#vitrine" class="btn btn-primary btn-large">🛒 COMEÇAR COMPRAS</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Suporte -->
+  <section class="suporte">
+    <div class="container">
+      <h2 class="section-title text-light">PRECISA DE AJUDA?</h2>
+      <p class="suporte-text">Fale direto com o David</p>
+      <a href="https://wa.me/5541999684188" target="_blank" class="btn btn-whatsapp">
+        <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
+        CHAMAR NO WHATSAPP
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-text">© 2026 Rolê de Quinta - Loja Oficial. Todos os direitos reservados.</p>
+      <p class="footer-copy">Design exclusivo para motociclistas. Série RQ 2026.</p>
+      <p class="footer-pix">🏍️ Feito por quem vive o rolê.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

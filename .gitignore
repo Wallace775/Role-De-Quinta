@@ -1,0 +1,4 @@
+.DS_Store
+Thumbs.db
+*.log
+generate_hero.py
