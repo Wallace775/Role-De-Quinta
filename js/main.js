@@ -136,6 +136,8 @@ function copiarPix() {
 function finalizarPedido(event) {
   event.preventDefault();
 
+  const idGerado = Math.floor(100000 + Math.random() * 900000).toString();
+
   const nome = document.getElementById('nome').value;
   const whatsapp = document.getElementById('whatsapp').value;
 
@@ -162,11 +164,9 @@ function finalizarPedido(event) {
     cliente: nome,
     pedido: pedidoDetalhado,
     valorTotal: `R$ ${total.toFixed(2).replace('.', ',')}`,
-    idPedido: Math.floor(100000 + Math.random() * 900000).toString()
+    idPedido: idGerado
   };
 
-  // iOS Safari: abrir WhatsApp IMEDIATAMENTE (antes do fetch)
-  // Isso evita o bloqueio de pop-up/redirecionamento
   const numeroDavid = '5541999684188';
   let itensMensagem = '';
   carrinho.forEach(item => {
@@ -174,6 +174,7 @@ function finalizarPedido(event) {
   });
 
   let mensagem = `🏍️ *NOVO PEDIDO - ROLÊ DE QUINTA* 🏍️%0A%0A`;
+  mensagem += `🆔 *PEDIDO:* ${idGerado}%0A`;
   mensagem += `👤 *CLIENTE:* ${nome}%0A`;
   mensagem += `📱 *WHATSAPP:* ${whatsapp}%0A%0A`;
   mensagem += `📦 *ITENS:*%0A${itensMensagem}%0A`;
@@ -183,33 +184,20 @@ function finalizarPedido(event) {
 
   const whatsappUrl = `https://wa.me/${numeroDavid}?text=${mensagem}`;
 
-  // Abre o WhatsApp imediatamente (iOS não bloqueia ação síncrona)
-  window.location.href = whatsappUrl;
+  try {
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(dadosPlanilha)
+    });
+  } catch (err) {
+    console.log('⚠️ Erro ao enviar para planilha', err);
+  }
 
-  // Fetch roda em background sem interferir no redirecionamento
-  fetch(SCRIPT_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(dadosPlanilha)
-  })
-  .then(() => {
-    console.log('✅ Pedido registrado na planilha');
-  })
-  .catch((err) => {
-    console.log('⚠️ Erro ao registrar na planilha, mas WhatsApp foi aberto', err);
-  })
-  .finally(() => {
-    // Limpa o carrinho e formulário após envio
-    carrinho = [];
-    atualizarCarrinho();
-    fecharCheckout();
-    event.target.reset();
-    btnConfirmar.textContent = 'CONFIRMAR PEDIDO';
-    btnConfirmar.disabled = false;
-  });
+  window.location.href = whatsappUrl;
 }
 
 document.addEventListener('DOMContentLoaded', function() {
