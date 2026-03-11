@@ -150,10 +150,6 @@ function finalizarPedido(event) {
     return;
   }
 
-  const textoOriginal = btnConfirmar.textContent;
-  btnConfirmar.textContent = 'Enviando...';
-  btnConfirmar.disabled = true;
-
   const total = carrinho.reduce((sum, item) => sum + (item.preco * item.qtd), 0);
 
   let pedidoDetalhado = '';
@@ -162,44 +158,16 @@ function finalizarPedido(event) {
   });
 
   const dadosPlanilha = {
+    whatsapp: whatsapp,
     cliente: nome,
     pedido: pedidoDetalhado,
-    valorTotal: `R$ ${total.toFixed(2).replace('.', ',')}`
+    valorTotal: `R$ ${total.toFixed(2).replace('.', ',')}`,
+    idPedido: Math.floor(100000 + Math.random() * 900000).toString()
   };
 
-  fetch(SCRIPT_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(dadosPlanilha)
-  })
-  .then(() => {
-    abrirWhatsApp(nome, whatsapp, total);
-    alert('✅ Pedido registrado com sucesso! Você será redirecionado para o WhatsApp do David.\n\n📍 Após confirmar o PIX, acompanhe os avisos no grupo do RQ e procure os administradores para retirar seu moletom!');
-    carrinho = [];
-    atualizarCarrinho();
-    fecharCheckout();
-    event.target.reset();
-  })
-  .catch(() => {
-    setTimeout(() => {
-      abrirWhatsApp(nome, whatsapp, total);
-      alert('⚠️ Registro enviado! Redirecionando para WhatsApp...\n\n📍 Após confirmar o PIX, acompanhe os avisos no grupo do RQ e procure os administradores para retirar seu moletom!');
-      carrinho = [];
-      atualizarCarrinho();
-      fecharCheckout();
-      event.target.reset();
-    }, 2000);
-  })
-  .finally(() => {
-    btnConfirmar.textContent = textoOriginal;
-    btnConfirmar.disabled = false;
-  });
-}
-
-function abrirWhatsApp(nome, whatsapp, total) {
+  // iOS Safari: abrir WhatsApp IMEDIATAMENTE (antes do fetch)
+  // Isso evita o bloqueio de pop-up/redirecionamento
+  const numeroDavid = '5541999684188';
   let itensMensagem = '';
   carrinho.forEach(item => {
     itensMensagem += `- ${item.nome} (Tam: ${item.tamanho}) - Qtd: ${item.qtd}%0A`;
@@ -213,9 +181,35 @@ function abrirWhatsApp(nome, whatsapp, total) {
   mensagem += `✅ *PEDIDO JÁ REGISTRADO NA PLANILHA OFICIAL*%0A%0A`;
   mensagem += `⚠️ *AVISO:* O comprovante do PIX será enviado em seguida.`;
 
-  const numeroDavid = '5541999684188';
   const whatsappUrl = `https://wa.me/${numeroDavid}?text=${mensagem}`;
-  window.open(whatsappUrl, '_blank');
+
+  // Abre o WhatsApp imediatamente (iOS não bloqueia ação síncrona)
+  window.location.href = whatsappUrl;
+
+  // Fetch roda em background sem interferir no redirecionamento
+  fetch(SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(dadosPlanilha)
+  })
+  .then(() => {
+    console.log('✅ Pedido registrado na planilha');
+  })
+  .catch((err) => {
+    console.log('⚠️ Erro ao registrar na planilha, mas WhatsApp foi aberto', err);
+  })
+  .finally(() => {
+    // Limpa o carrinho e formulário após envio
+    carrinho = [];
+    atualizarCarrinho();
+    fecharCheckout();
+    event.target.reset();
+    btnConfirmar.textContent = 'CONFIRMAR PEDIDO';
+    btnConfirmar.disabled = false;
+  });
 }
 
 document.addEventListener('DOMContentLoaded', function() {
